@@ -1,4 +1,5 @@
-import { Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { CreateTodoDto } from './dtos/create-todo.dto';
 
 @Controller('todos')
 export class TodosController {
@@ -8,12 +9,12 @@ export class TodosController {
     }
 
     @Post()
-    createTodo() {
-        return 'create todo';
+    createTodo(@Body() body: CreateTodoDto) {
+        return body;
     }
 
     @Get('/:id')
-    getTodo() {
-        return 'get todo';
+    getTodo(@Param('id') id: string) {
+        return `get todo ${id}`;
     }
 }
