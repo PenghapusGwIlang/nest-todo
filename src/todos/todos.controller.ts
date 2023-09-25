@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, NotFoundException, Param, Post } from '@nestjs/common';
 import { CreateTodoDto } from './dtos/create-todo.dto';
 import { TodosService } from './todos.service';
 
@@ -17,7 +17,13 @@ export class TodosController {
     }
 
     @Get('/:id')
-    getTodo(@Param('id') id: string) {
-        return this.todosService.findOne(+id);
+    async getTodo(@Param('id') id: string) {
+        const todo = await this.todosService.findOne(+id);
+
+        if (!todo) {
+            throw new NotFoundException('Todo not found');
+        }
+
+        return todo;
     }
 }
