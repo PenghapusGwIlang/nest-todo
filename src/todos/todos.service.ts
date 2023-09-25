@@ -3,11 +3,7 @@ import { TodosRepository } from './todos.repository';
 
 @Injectable()
 export class TodosService {
-    todosRepo: TodosRepository;
-
-    constructor() {
-        this.todosRepo = new TodosRepository();
-    }
+    constructor(private readonly todosRepo: TodosRepository) {}
 
     findAll() {
         return this.todosRepo.findAll();

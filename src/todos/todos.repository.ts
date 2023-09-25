@@ -1,5 +1,7 @@
+import { Injectable } from "@nestjs/common";
 import { readFile, writeFile } from "fs/promises";
 
+@Injectable()
 export class TodosRepository {
     async findAll() {
         const data = await readFile('todos.json', 'utf-8');
